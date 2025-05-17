@@ -1,8 +1,10 @@
-Meeting & Collaboration Logs
+Legacy Branch
 
-This folder contains visual proof of our collaboration as a team, including:
-- Screenshots of online meetings
-- Chat discussions 
-- GitHub contributions and pull request reviews
+### `legacy-cp1`
+This branch contains **archived code and materials** from our original CP1 project. It serves as a reference for how the system was initially designed and implemented.
 
-Maintained as part of our transparency and documentation process.
+📌 **Contents:**
+- Original CP1 console-based code
+- Previous class structures and logic
+
+🛑 **Do not modify** or merge this branch into `dev` or `main`. It is preserved strictly for reference and comparison.
