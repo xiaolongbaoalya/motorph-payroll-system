@@ -16,9 +16,9 @@ It streamlines employee salary computation, attendance tracking, and payroll rep
 
 - **main** – Stable, production-ready code  
 - **dev** – Main collaboration branch  
-- **Personal Dev Branches**:
-  - `dev-aly` – Personal branch for Aly
-  - `dev-christine` – Personal branch for Christine
-  - `dev-felice` – Personal branch for Felice
-  - `dev-shane` – Personal branch for Shane
-  - `dev-red` – Personal branch for Red
+- **Personal Dev Folder**:
+  - `dev-aly` – Personal Folder for Aly
+  - `dev-christine` – Personal Folder for Christine
+  - `dev-felice` – Personal Folder for Felice
+  - `dev-shane` – Personal Folder for Shane
+  - `dev-red` – Personal Folder for Red
