@@ -1,60 +1,88 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+package com.mycompany.experimental_purposed;
 
+import java.util.Scanner;
 /**
  *
  * @author Grazielle
  */
-public class Payroll_System_Daily_Code {
+public class Experimental_Purposed {
 
-     public static void main(String[] args) throws Exception{ // we need this "throws" for the .parse(TimeInInput) and .parse.(TimeOutInput).
+     public static void main(String[] args) { 
        
-       //Time in and Time out simplified code
-        try (Scanner Answer = new Scanner(System.in)) {
+       //I used Red's way but added the string "<<Invalid input. Please follow HH:MM format.>>" after timepattern because otherwise it doesn't work--netbeans says the length doesn't match.
+        try (Scanner scanner = new Scanner(System.in)) {
             String timePattern = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
-            // This allows user to input their time in and time out to use for calculation
-            String TimeInInput = getValidatedInput(Answer, "Enter Time-In (HH:MM): ", timePattern, "<<Invalid input. Please follow HH:MM format.>>");
-            String TimeOutInput = getValidatedInput(Answer, "Enter Time-Out (HH:MM): ", timePattern, "<<Invalid input. Please follow HH:MM format.>>");
             
-            // Used getValidatedInput() and getValidatedDoubleInput to make the function cleaner and shorter
-            double HourlyRateInput = getValidatedDoubleInput(Answer, "Enter Hourly Rate (no commas): ");
-            double BasicSalaryInput = getValidatedDoubleInput(Answer, "Enter Basic Salary (no commas): ");
-            double SSSInput = getValidatedDoubleInput(Answer, "Enter SSS Contribution (no commas): ");
+            String timeInInput, timeOutInput;
+            while (true) {
+                try {
+                    timeInInput = getValidatedInput(scanner, "Enter Time-In (HH:MM): ", timePattern, "<<Invalid input. Please follow HH:MM format.>>"); // this one!
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            while (true) {
+                try {
+                    timeOutInput = getValidatedInput(scanner, "Enter Time-Out (HH:MM): ", timePattern, "<<Invalid input. Please follow HH:MM format.>>");
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
             
-            // << HOURLY RATE >>
-            SimpleDateFormat TimeFormat = new SimpleDateFormat ("HH:mm");
-            Date TimeIn = TimeFormat.parse(TimeInInput);
-            Date TimeOut = TimeFormat.parse(TimeOutInput);
+            // I also used red's way here! personally speaking, sure it looks easy on the eyes but we will have issues with past-midnight time-outs.
+            int timeInHours = Integer.parseInt(timeInInput.split(":")[0]);
+            int timeInMinutes = Integer.parseInt(timeInInput.split(":")[1]);
+            int timeOutHours = Integer.parseInt(timeOutInput.split(":")[0]);
+            int timeOutMinutes = Integer.parseInt(timeOutInput.split(":")[1]);
             
-            // Time Computation + Hourly rate
-            double DifferenceInMilliSeconds1 = TimeOut.getTime() - TimeIn.getTime();
-            if (DifferenceInMilliSeconds1 < 0) {
-                DifferenceInMilliSeconds1 += 24 * 60 * 60 * 1000;} 
-            double DifferenceInHours = DifferenceInMilliSeconds1 / (60 * 60 * 1000);
-            double HourlyRateSalary = DifferenceInHours * HourlyRateInput;
+            // Trial for restrict overtime code. No OT will be counted if time-in is after 8AM.
+            int requiredTimeInHours = 8;
+            int requiredTimeOutHours = 17; // 5PM
             
-            // Monthly Contributions Computation
-            double PhilHealth = (BasicSalaryInput * 0.05) / 2;
+            double totalHoursWorked;
+            double timeInTotal = timeInHours + (timeInMinutes / 60.0);
+            double timeOutTotal = timeOutHours + (timeOutMinutes / 60.0);
+         
+           if (timeOutTotal < timeInTotal) {
+                timeOutTotal += 24; // Adding 24 hours to correctly calculate the total work time
+            }
+            
+            if (timeInHours > requiredTimeInHours || (timeInHours == requiredTimeInHours && timeInMinutes > 0)) {
+                System.out.println("<<Overtime hours will not be counted due to late time-in.>>");
+                timeOutTotal = Math.min(timeOutTotal, requiredTimeOutHours); // Restricting time-out to 5PM
+            }
+            
+            totalHoursWorked = (timeOutTotal - timeInTotal) - 1; // "-1" is the 1 hour lunch break.
+
+            double hourlyRate = getValidatedDouble(scanner, "Enter Hourly Rate (no commas): ");
+            double basicSalary = getValidatedDouble(scanner, "Enter Basic Salary (no commas): ");
+            double sssContribution = getValidatedDouble(scanner, "Enter SSS Contribution (no commas): ");
+
+            double hourlyRateSalary = (totalHoursWorked * hourlyRate) - hourlyRate; // "- hourlyRate" is for the lunch break included in the totalHoursWorked.
+
+            double PhilHealth = (basicSalary * 0.05) / 2;
             double PhilHealthDaily = PhilHealth / 20;
-            double SSSDaily = SSSInput / 20;
+            double SSSDaily = sssContribution / 20;
             double PagIbig = 200;
-            double PagIbigDaily = PagIbig / 20; 
-            double MonthlyGovernmentDeductions = PhilHealth + SSSInput + PagIbig;
+            double PagIbigDaily = PagIbig / 20;
+            double MonthlyGovernmentDeductions = PhilHealth + sssContribution + PagIbig;
             double DailyGovernmentDeductions = PhilHealthDaily + SSSDaily + PagIbigDaily;
             
-            // Print Outputs
+            // as for the outputs here well...preference i suppose. i just like my layout and seeing the numbers presented this way.
             String createnewline = System.getProperty("line.separator");
             
             System.out.println(createnewline + "[Daily Payslip]");
-            System.out.printf("Total Hours Worked: %.2f hours\n", DifferenceInHours);
-            System.out.printf("Salary Based on Hours Worked: %.2f Pesos\n", HourlyRateSalary);
+            System.out.printf("Total Hours Worked: %.2f hours\n", totalHoursWorked);
+            System.out.printf("Salary Based on Hours Worked: %.2f Pesos\n", hourlyRateSalary);
             System.out.println(createnewline + "Government Contributions:");
             System.out.println("PhilHealth:");
             System.out.printf("Monthly: %.2f Pesos\n", PhilHealth);
             System.out.printf("Daily: %.2f Pesos\n", PhilHealthDaily);
             System.out.println(createnewline + "SSS:");
-            System.out.printf("Monthly: %.2f Pesos\n", SSSInput);
+            System.out.printf("Monthly: %.2f Pesos\n", sssContribution);
             System.out.printf("Daily: %.2f Pesos\n", SSSDaily);
             System.out.println(createnewline + "Pag-Ibig:");
             System.out.printf("Monthly: %.2f Pesos\n", PagIbig);
@@ -62,11 +90,11 @@ public class Payroll_System_Daily_Code {
             System.out.println(createnewline + createnewline + "Total Government Deductions:");
             System.out.printf("Monthly: %.2f Pesos\n", MonthlyGovernmentDeductions);
             System.out.printf("Daily: %.2f Pesos\n", DailyGovernmentDeductions);
-            System.out.printf(createnewline + "Daily Net Salary: %.2f Pesos\n", (HourlyRateSalary - DailyGovernmentDeductions));
+            System.out.printf(createnewline + "Daily Net Salary: %.2f Pesos\n", (hourlyRateSalary - DailyGovernmentDeductions));
         }      
     }
     
-   // validate user input for single format
+    // for this validating part i retained your way
     private static String getValidatedInput(Scanner Answer, String prompt, String pattern, String errorMessage) {
         while (true) {
             System.out.print(prompt);
@@ -78,8 +106,7 @@ public class Payroll_System_Daily_Code {
         }
     }
 
-    // validate user input for double format
-    private static double getValidatedDoubleInput(Scanner Answer, String prompt) {
+    private static double getValidatedDouble(Scanner Answer, String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = Answer.nextLine();
