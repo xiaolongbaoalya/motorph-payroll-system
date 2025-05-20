@@ -1,3 +1,4 @@
 [May 17, 2025] dev-aly created Github repo and branch structuring: purpose, its content, and notes for each
 [May 19, 2025] dev-aly worked on Homework 3 on Camu and uploaded it in her folder in Github repo under dev branch
 [May 20, 2025] dev-aly began drafting the Class Diagram for the code rework
+[May 20, 2025] dev-aly uploaded the new Class Diagram (Contributors: dev-aly, dev-red, dev-felice)
