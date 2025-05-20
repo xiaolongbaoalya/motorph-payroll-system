@@ -2,3 +2,4 @@
 [May 19, 2025] dev-aly worked on Homework 3 on Camu and uploaded it in her folder in Github repo under dev branch
 [May 20, 2025] dev-aly began drafting the Class Diagram for the code rework
 [May 20, 2025] dev-aly uploaded the new Class Diagram
+[May 20, 2025] dev-aly messaged mentor for feedback on Class Diagram
