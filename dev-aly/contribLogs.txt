@@ -3,3 +3,4 @@
 [May 20, 2025] dev-aly began drafting the Class Diagram for the code rework
 [May 20, 2025] dev-aly uploaded the new Class Diagram
 [May 20, 2025] dev-aly messaged mentor for feedback on Class Diagram
+[May 24, 2025] dev-aly refactored old code to match the new class diagram and applied modular structure (mock data only for testing)
