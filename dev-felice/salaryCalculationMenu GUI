@@ -1,4 +1,4 @@
-private void salaryCalculationMenu(Component parent) {
+private void salaryCalculationMenu(Component parent) { // THIS IS DONE
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(parent), "Salary Calculation", true);
         dialog.setSize(400, 350);
         dialog.setLocationRelativeTo(parent);
@@ -21,13 +21,10 @@ private void salaryCalculationMenu(Component parent) {
 
         for (String option : options) {
             JButton button = new JButton(option);
-            button.setFocusPainted(false);
-            button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            styleButton(button);
             button.setPreferredSize(new Dimension(300, 40));
             button.setMaximumSize(new Dimension(300, 40));
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
-            button.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-            button.setBackground(new Color(245, 245, 245));
 
             menuPanel.add(Box.createVerticalStrut(10));
             menuPanel.add(button);
