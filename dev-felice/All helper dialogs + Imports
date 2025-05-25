@@ -1,0 +1,193 @@
+import com.compprog1282025.auth.UserRole;
+import com.compprog1282025.model.Employee;
+import com.compprog1282025.model.Attendance;
+import com.compprog1282025.service.*;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.File;
+import java.time.YearMonth;
+import java.util.List;
+import java.awt.Dialog.ModalityType;
+import java.awt.Window;
+
+private void styleButton(JButton button) {
+        button.setFocusPainted(false);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        button.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        button.setBackground(new Color(245, 245, 245));
+}
+    private void styleButtonSmall(JButton button) {
+        button.setFocusPainted(false);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        button.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        button.setBackground(new Color(245, 245, 245));
+}
+    private YearMonth promptYearMonth(Component parent) {
+    String input = StyledInputDialog(parent, "Enter Month and Year", "Enter month and year (yyyy-MM):");
+    if (input == null) return null;
+    try {
+        return YearMonth.parse(input.trim());
+    } catch (Exception e) {
+        StyledErrorDialog(parent, "Error", "Invalid format. Use yyyy-MM.");
+        return null;
+    }
+}
+    private Employee promptEmployeeNumber(Component parent) { //DONE
+    String input = StyledInputDialog(parent, "Enter Employee Number", "Enter employee number:");
+    if (input == null) return null; // User cancelled
+
+    try {
+        int empNum = Integer.parseInt(input.trim());
+        Employee emp = employeeService.findEmployeeByNumber(empNum);
+        if (emp == null) {
+            JOptionPane.showMessageDialog(parent, "Employee not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return emp;
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(parent, "Invalid employee number.", "Error", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+}
+
+    private void showLongText(Component parent, String title, String content) {
+    JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
+    dialog.setSize(600, 400);
+    dialog.setLocationRelativeTo(parent);
+    dialog.setLayout(new BorderLayout(10, 10));
+
+    JTextArea area = new JTextArea(20, 50);
+    area.setText(content);
+    area.setEditable(false);
+    area.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    area.setLineWrap(true);
+    area.setWrapStyleWord(true);
+
+    JScrollPane scrollPane = new JScrollPane(area);
+    dialog.add(scrollPane, BorderLayout.CENTER);
+
+    JButton okButton = new JButton("OK");
+    styleButtonSmall(okButton);
+    okButton.setPreferredSize(new Dimension(80, 30));
+    okButton.setMaximumSize(new Dimension(80, 30));
+    okButton.addActionListener(e -> dialog.dispose());
+
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.add(okButton);
+    dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+    dialog.setVisible(true);
+}
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new MainGUI().setVisible(true));
+    }
+    
+    private String StyledInputDialog(Component parent, String title, String message) { //DONE
+    JDialog inputDialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, ModalityType.APPLICATION_MODAL);
+    inputDialog.setLayout(new BorderLayout(10, 10));
+    inputDialog.setSize(350, 130);
+    inputDialog.setLocationRelativeTo(parent);
+
+    JTextField inputField = new JTextField();
+    inputField.setPreferredSize(new Dimension(325, 25)); //text area
+
+    JButton okButton = new JButton("OK");
+    JButton cancelButton = new JButton("Cancel");
+
+    // Apply your custom button styling
+    styleButtonSmall(okButton);
+    okButton.setPreferredSize(new Dimension(60, 30));
+    okButton.setMaximumSize(new Dimension(60, 30));
+
+    styleButtonSmall(cancelButton);
+    cancelButton.setPreferredSize(new Dimension(60, 30));
+    cancelButton.setMaximumSize(new Dimension(60, 30));
+
+    final String[] result = new String[1]; // Used to hold input result
+    result[0] = null;
+
+    okButton.addActionListener(e -> {
+        result[0] = inputField.getText().trim();
+        inputDialog.dispose();
+    });
+
+    cancelButton.addActionListener(e -> {
+        result[0] = null;
+        inputDialog.dispose();
+    });
+
+    JPanel inputPanel = new JPanel(new BorderLayout());
+    inputPanel.add(new JLabel(message), BorderLayout.NORTH);
+
+    JPanel inputFieldWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    inputFieldWrapper.add(inputField);
+    inputPanel.add(inputFieldWrapper, BorderLayout.CENTER);
+
+
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    buttonPanel.add(okButton);
+    buttonPanel.add(cancelButton);
+
+    inputDialog.add(inputPanel, BorderLayout.CENTER);
+    inputDialog.add(buttonPanel, BorderLayout.SOUTH);
+    inputDialog.setVisible(true);
+
+    return result[0]; // Returns null if cancelled
+}
+    private void StyledErrorDialog(Component parent, String title, String message) { //DONE
+    JDialog errorDialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
+    errorDialog.setLayout(new BorderLayout(10, 10));
+    errorDialog.setSize(300, 130);
+    errorDialog.setLocationRelativeTo(parent);
+
+    JLabel messageLabel = new JLabel(message);
+    messageLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+    messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+    JButton okButton = new JButton("OK");
+    styleButtonSmall(okButton);
+    okButton.setPreferredSize(new Dimension(60, 30));
+    okButton.setMaximumSize(new Dimension(60, 30));
+    okButton.addActionListener(e -> errorDialog.dispose());
+
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    buttonPanel.add(okButton);
+
+    errorDialog.add(messageLabel, BorderLayout.CENTER);
+    errorDialog.add(buttonPanel, BorderLayout.SOUTH);
+    errorDialog.setVisible(true);
+}
+    private void StyledInfoDialog(Component parent, String title, String message) {
+    JDialog dialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
+    dialog.setLayout(new BorderLayout(10, 10));
+    dialog.setSize(350, 180);
+    dialog.setLocationRelativeTo(parent);
+
+    JTextArea messageArea = new JTextArea(message);
+    messageArea.setEditable(false);
+    messageArea.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    messageArea.setWrapStyleWord(true);
+    messageArea.setLineWrap(true);
+    messageArea.setBackground(dialog.getBackground());
+    messageArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+    JButton okButton = new JButton("OK");
+    styleButtonSmall(okButton);
+    okButton.setPreferredSize(new Dimension(60, 30));
+
+    okButton.addActionListener(e -> dialog.dispose());
+
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    buttonPanel.add(okButton);
+
+    dialog.add(new JScrollPane(messageArea), BorderLayout.CENTER);
+    dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+    dialog.setVisible(true);
+}
+
+
+
+}
