@@ -1,4 +1,5 @@
 Enhancements Made to the Payroll System GUI 
+
 **1. Main Window (Login Screen)**
  Added MotorPH Logo: I added the MotorPH company logo at the top of the main window to make the application look more professional and to match MotorPH's overall branding.
  Change Buttons color: I changed all the main and small buttons to use (#1c3680) to match MotorPh's logo color
