@@ -43,32 +43,29 @@ public class MainGUI extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(new Color(245, 248, 250));
         GridBagConstraints gbc = new GridBagConstraints();
 
-        
-        JLabel logoLabel = new JLabel();
-        ImageIcon logoIcon = loadLogoIcon();
-        if (logoIcon != null) {
-            logoLabel.setIcon(logoIcon);
-            logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.gridwidth = 2;
-            gbc.insets = new Insets(20, 10, 10, 10);
-            panel.add(logoLabel, gbc);
-        }
 
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weighty = 1.0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(Box.createVerticalGlue(), gbc);
+
+      
         JLabel label = new JLabel("Login as:");
         label.setFont(new Font("Segoe UI", Font.BOLD, 20));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setForeground(new Color(33, 37, 41));
         gbc.gridy = 1;
+        gbc.weighty = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
         panel.add(label, gbc);
 
+        // Buttons
         JButton employeeBtn = new JButton("Employee");
         JButton adminBtn = new JButton("Admin");
         styleButton(employeeBtn);
@@ -79,35 +76,27 @@ public class MainGUI extends JFrame {
         employeeBtn.addActionListener(e -> employeeLogin());
         adminBtn.addActionListener(e -> showAdminMenu());
 
-        gbc.gridwidth = 1;
-        gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.insets = new Insets(20, 20, 10, 10);
-        panel.add(employeeBtn, gbc);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(employeeBtn);
+        buttonPanel.add(adminBtn);
 
-        gbc.gridx = 1;
-        gbc.insets = new Insets(20, 10, 10, 20);
-        panel.add(adminBtn, gbc);
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+        panel.add(buttonPanel, gbc);
+
+        // Add vertical glue after the buttons
+        gbc.gridy = 3;
+        gbc.weighty = 1.0;
+        panel.add(Box.createVerticalGlue(), gbc);
 
         add(panel);
     }
-//I added MotorPH Logo
-    private ImageIcon loadLogoIcon() {
-        try {
-            java.net.URL imgURL = getClass().getClassLoader().getResource("motorph_logo.png");
-            if (imgURL != null) {
-                ImageIcon icon = new ImageIcon(imgURL);
-                
-                Image scaled = icon.getImage().getScaledInstance(180, 90, Image.SCALE_SMOOTH);
-                return new ImageIcon(scaled);
-            }
-        } catch (Exception e) {
-            System.err.println("Logo not found: " + e.getMessage());
-        }
-        return null;
-    }
-
- //Also enhanced the button to match with MotorPH's logo
+    
+//Change color of the button to 0x1c3680 to match motorPH's logo. We can also add the logo if needed
     private void styleButton(JButton button) {
         button.setFocusPainted(false);
         button.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -148,7 +137,7 @@ public class MainGUI extends JFrame {
         StyledErrorDialog(this, "Error", "Invalid employee number.");
     }
 }
-//Adjusted the size of the Dashboard and added "Basic Information" as header
+
     private void showEmployeeDashboard(Employee employee) {
         JDialog dialog = new JDialog(this, "Employee Dashboard - " + employee.getFullName(), true);
         dialog.setSize(500, 420);
@@ -262,16 +251,16 @@ public class MainGUI extends JFrame {
                 "Exit"
         };
 
-        // create a panel to hold buttons with vertical box layout
+      
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
         menuPanel.setBackground(Color.WHITE);
         menuPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
-        // add vertical 'glue' to push buttons to center the buttons
+      
         menuPanel.add(Box.createVerticalGlue());
 
-        // create buttons for each menu option with spacing--also the visual part
+       
         for (String option : menuOptions) {
             JButton button = new JButton(option);
             styleButton(button);
@@ -385,8 +374,7 @@ public class MainGUI extends JFrame {
                         YearMonth ym = promptYearMonth(dialog);
                         if (ym == null) return;
                         double gross = payrollService.calculateMonthlySalary(emp, ym);
-                        JOptionPane.showMessageDialog(dialog, String.format("Gross Salary for %s in %s: %.2f",
-                                emp.getFullName(), ym, gross));
+                        StyledInfoDialog(dialog, "Gross Salary", String.format("Gross Salary for %s in %s: %.2f", emp.getFullName(), ym, gross));
                     }
                     case "Net Salary for specific employee" -> {
                         Employee emp = promptEmployeeNumber(dialog);
@@ -394,8 +382,7 @@ public class MainGUI extends JFrame {
                         YearMonth ym = promptYearMonth(dialog);
                         if (ym == null) return;
                         double net = payrollService.calculateNetSalary(emp, ym);
-                        JOptionPane.showMessageDialog(dialog, String.format("Net Salary for %s in %s: %.2f",
-                                emp.getFullName(), ym, net));
+                        StyledInfoDialog(dialog, "Net Salary", String.format("Net Salary for %s in %s: %.2f", emp.getFullName(), ym, net));
                     }
                     case "Close" -> dialog.dispose();
                 }
@@ -437,22 +424,22 @@ public class MainGUI extends JFrame {
         return null;
     }
 }
-    private Employee promptEmployeeNumber(Component parent) { //DONE
-    String input = StyledInputDialog(parent, "Enter Employee Number", "Enter employee number:");
-    if (input == null) return null; // User cancelled
+    private Employee promptEmployeeNumber(Component parent) {
+        String input = StyledInputDialog(parent, "Enter Employee Number", "Enter employee number:");
+        if (input == null) return null; // User cancelled
 
-    try {
-        int empNum = Integer.parseInt(input.trim());
-        Employee emp = employeeService.findEmployeeByNumber(empNum);
-        if (emp == null) {
-            JOptionPane.showMessageDialog(parent, "Employee not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            int empNum = Integer.parseInt(input.trim());
+            Employee emp = employeeService.findEmployeeByNumber(empNum);
+            if (emp == null) {
+                StyledErrorDialog(parent, "Error", "Employee not found.");
+            }
+            return emp;
+        } catch (NumberFormatException e) {
+            StyledErrorDialog(parent, "Error", "Invalid employee number.");
+            return null;
         }
-        return emp;
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(parent, "Invalid employee number.", "Error", JOptionPane.ERROR_MESSAGE);
-        return null;
     }
-}
 
     private void showLongText(Component parent, String title, String content) {
     JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
@@ -552,29 +539,37 @@ public class MainGUI extends JFrame {
 
         return result[0];
     }
-    private void StyledErrorDialog(Component parent, String title, String message) { //DONE
-    JDialog errorDialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
-    errorDialog.setLayout(new BorderLayout(10, 10));
-    errorDialog.setSize(300, 130);
-    errorDialog.setLocationRelativeTo(parent);
+    private void StyledErrorDialog(Component parent, String title, String message) {
+        JDialog errorDialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
+        errorDialog.setLayout(new BorderLayout(10, 10));
+        errorDialog.setSize(340, 150);
+        errorDialog.setLocationRelativeTo(parent);
+        errorDialog.getContentPane().setBackground(new Color(245, 248, 250));
 
-    JLabel messageLabel = new JLabel(message);
-    messageLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
-    messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        // Icon and message panel
+        JPanel contentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 12, 18));
+        contentPanel.setOpaque(false);
+        JLabel iconLabel = new JLabel(UIManager.getIcon("OptionPane.errorIcon"));
+        JLabel messageLabel = new JLabel(message);
+        messageLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        contentPanel.add(iconLabel);
+        contentPanel.add(messageLabel);
 
-    JButton okButton = new JButton("OK");
-    styleButtonSmall(okButton);
-    okButton.setPreferredSize(new Dimension(60, 30));
-    okButton.setMaximumSize(new Dimension(60, 30));
-    okButton.addActionListener(e -> errorDialog.dispose());
+        // OK button
+        JButton okButton = new JButton("OK");
+        styleButtonSmall(okButton);
+        okButton.setPreferredSize(new Dimension(80, 32));
+        okButton.setMaximumSize(new Dimension(80, 32));
+        okButton.addActionListener(e -> errorDialog.dispose());
 
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    buttonPanel.add(okButton);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(okButton);
 
-    errorDialog.add(messageLabel, BorderLayout.CENTER);
-    errorDialog.add(buttonPanel, BorderLayout.SOUTH);
-    errorDialog.setVisible(true);
-}
+        errorDialog.add(contentPanel, BorderLayout.CENTER);
+        errorDialog.add(buttonPanel, BorderLayout.SOUTH);
+        errorDialog.setVisible(true);
+    }
     private void StyledInfoDialog(Component parent, String title, String message) {
     JDialog dialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
     dialog.setLayout(new BorderLayout(10, 10));
