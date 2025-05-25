@@ -1,0 +1,6 @@
+private void styleButton(JButton button) {
+        button.setFocusPainted(false);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        button.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        button.setBackground(new Color(245, 245, 245));
+}
