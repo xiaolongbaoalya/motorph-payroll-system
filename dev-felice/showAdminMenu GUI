@@ -48,23 +48,6 @@ private void showAdminMenu() {// THIS IS DONE
         dialog.setVisible(true);
     }
 
-    private void showEmployeeList(Component parent) {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(parent), "All Employees", true);
-        dialog.setSize(700, 400);
-        dialog.setLocationRelativeTo(parent);
-
-        String[] columns = {"Employee Number", "Full Name", "Position", "Hourly Rate"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-
-        for (Employee e : employees) {
-            model.addRow(new Object[]{
-                    e.getEmployeeNumber(),
-                    e.getFullName(),
-                    e.getPosition(),
-                    e.getHourlyRate()
-            });
-        }
-
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
 
