@@ -8,4 +8,4 @@ dev-shane: The main and small buttons on the login screen were updated to use th
 
 dev-felice: Created All helper dialogs + imports and GUI Parameters. Updated styleButton GUI, showAdminMenu GUI, salaryCalculationMenu GUI, and current GUI as whole.
 
-dev-aly:
+dev-aly: Created the landing page and dashboard view
