@@ -1,0 +1,83 @@
+private void salaryCalculationMenu(Component parent) {
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(parent), "Salary Calculation", true);
+        dialog.setSize(400, 350);
+        dialog.setLocationRelativeTo(parent);
+        dialog.setLayout(new BorderLayout());
+
+        String[] options = {
+            "Gross Salary for ALL employees",
+            "Net Salary for ALL employees",
+            "Gross Salary for specific employee",
+            "Net Salary for specific employee",
+            "Close"
+        };
+
+        JPanel menuPanel = new JPanel();
+        menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
+        menuPanel.setBackground(Color.WHITE);
+        menuPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+        menuPanel.add(Box.createVerticalGlue());
+
+        for (String option : options) {
+            JButton button = new JButton(option);
+            button.setFocusPainted(false);
+            button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            button.setPreferredSize(new Dimension(300, 40));
+            button.setMaximumSize(new Dimension(300, 40));
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            button.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+            button.setBackground(new Color(245, 245, 245));
+
+            menuPanel.add(Box.createVerticalStrut(10));
+            menuPanel.add(button);
+
+            button.addActionListener(e -> {
+                switch (option) {
+                    case "Gross Salary for ALL employees" -> {
+                        YearMonth ym = promptYearMonth(dialog);
+                        if (ym == null) return;
+                        StringBuilder sb = new StringBuilder("Gross Salaries for " + ym + ":\n\n");
+                        for (Employee emp : employees) {
+                            double gross = payrollService.calculateMonthlySalary(emp, ym);
+                            sb.append(String.format("Employee %d (%s): %.2f%n", emp.getEmployeeNumber(), emp.getFullName(), gross));
+                        }
+                        showLongText(dialog, "Gross Salaries", sb.toString());
+                    }
+                    case "Net Salary for ALL employees" -> {
+                        YearMonth ym = promptYearMonth(dialog);
+                        if (ym == null) return;
+                        StringBuilder sb = new StringBuilder("Net Salaries for " + ym + ":\n\n");
+                        for (Employee emp : employees) {
+                            double net = payrollService.calculateNetSalary(emp, ym);
+                            sb.append(String.format("Employee %d (%s): %.2f%n", emp.getEmployeeNumber(), emp.getFullName(), net));
+                        }
+                        showLongText(dialog, "Net Salaries", sb.toString());
+                    }
+                    case "Gross Salary for specific employee" -> {
+                        Employee emp = promptEmployeeNumber(dialog);
+                        if (emp == null) return;
+                        YearMonth ym = promptYearMonth(dialog);
+                        if (ym == null) return;
+                        double gross = payrollService.calculateMonthlySalary(emp, ym);
+                        JOptionPane.showMessageDialog(dialog, String.format("Gross Salary for %s in %s: %.2f",
+                                emp.getFullName(), ym, gross));
+                    }
+                    case "Net Salary for specific employee" -> {
+                        Employee emp = promptEmployeeNumber(dialog);
+                        if (emp == null) return;
+                        YearMonth ym = promptYearMonth(dialog);
+                        if (ym == null) return;
+                        double net = payrollService.calculateNetSalary(emp, ym);
+                        JOptionPane.showMessageDialog(dialog, String.format("Net Salary for %s in %s: %.2f",
+                                emp.getFullName(), ym, net));
+                    }
+                    case "Close" -> dialog.dispose();
+                }
+            });
+        }
+
+        menuPanel.add(Box.createVerticalGlue());
+        dialog.add(menuPanel, BorderLayout.CENTER);
+        dialog.setVisible(true);
+}
