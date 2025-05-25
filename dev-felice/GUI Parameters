@@ -1,0 +1,7 @@
+#Make everything to Jbuttons
+Font: Segoe UI
+Style: PLAIN
+Size: 16
+Button Size: Dimension(300, 40)
+Background: Color(245, 245, 245) // button.setFocusPainted(false) to disable dotted border
+Line Border: (Color. GRAY, 1)
