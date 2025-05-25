@@ -366,15 +366,33 @@ public class MainGUI extends JFrame {
 }
 
     private void showLongText(Component parent, String title, String content) {
-        JTextArea area = new JTextArea(20, 50);
-        area.setText(content);
-        area.setEditable(false);
-        area.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
+    dialog.setSize(600, 400);
+    dialog.setLocationRelativeTo(parent);
+    dialog.setLayout(new BorderLayout(10, 10));
 
-        JScrollPane scrollPane = new JScrollPane(area);
+    JTextArea area = new JTextArea(20, 50);
+    area.setText(content);
+    area.setEditable(false);
+    area.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    area.setLineWrap(true);
+    area.setWrapStyleWord(true);
 
-        JOptionPane.showMessageDialog(parent, scrollPane, title, JOptionPane.INFORMATION_MESSAGE);
-    }
+    JScrollPane scrollPane = new JScrollPane(area);
+    dialog.add(scrollPane, BorderLayout.CENTER);
+
+    JButton okButton = new JButton("OK");
+    styleButtonSmall(okButton);
+    okButton.setPreferredSize(new Dimension(80, 30));
+    okButton.setMaximumSize(new Dimension(80, 30));
+    okButton.addActionListener(e -> dialog.dispose());
+
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.add(okButton);
+    dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+    dialog.setVisible(true);
+}
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainGUI().setVisible(true));
