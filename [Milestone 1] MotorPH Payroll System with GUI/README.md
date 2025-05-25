@@ -8,4 +8,4 @@ dev-shane: Enhanced Main Window (Login Screen) by changing button color. Employe
 
 dev-felice: Created + updated all helper dialogs (styleButton, styleButtonSmall, etc) and added some imports and set the GUI parameters. Also created/updated current GUI (showAdminMenu GUI, salaryCalculationMenu GUI, etc.) after initial GUI by CM.
 
-dev-aly: Created the landing page and dashboard view
+dev-aly: Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly
