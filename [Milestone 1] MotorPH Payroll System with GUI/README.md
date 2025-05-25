@@ -4,8 +4,8 @@
 
 **dev-christine:** Converted restructured CP1 code to GUI. Uploaded zipped folder GUI Prototype.
 
-**dev-shane:** Enhanced Main Window (Login Screen) by changing button color. Employee dashboard section headers by adding bold section headers for Basic Information and Compensations. General improvements Consistent Fonts: used Segoe UI font.
-
 **dev-felice:** Created + updated all helper dialogs (styleButton, styleButtonSmall, etc) and added some imports and set the GUI parameters. Also created/updated current GUI (showAdminMenu GUI, salaryCalculationMenu GUI, etc.) after initial GUI by dev-christine
 
 **dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly
+
+**dev-shane:** Enhanced Main Window (Login Screen) by changing button color. Employee dashboard section headers by adding bold section headers for Basic Information and Compensations. General improvements Consistent Fonts: used Segoe UI font.
