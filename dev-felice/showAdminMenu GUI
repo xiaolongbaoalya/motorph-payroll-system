@@ -1,4 +1,4 @@
-    private void showAdminMenu() {
+private void showAdminMenu() {// THIS IS DONE
         JDialog dialog = new JDialog(this, "Admin Menu", true);
         dialog.setSize(600, 450);
         dialog.setLocationRelativeTo(this);
@@ -23,13 +23,10 @@
         // create buttons for each menu option with spacing--also the visual part
         for (String option : menuOptions) {
             JButton button = new JButton(option);
-            button.setFocusPainted(false);
-            button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            styleButton(button);
             button.setPreferredSize(new Dimension(300, 40));
             button.setMaximumSize(new Dimension(300, 40));
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
-            button.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-            button.setBackground(new Color(245, 245, 245));
 
             menuPanel.add(Box.createVerticalStrut(10)); // space between buttons
             menuPanel.add(button);
@@ -48,5 +45,29 @@
         
         dialog.add(menuPanel, BorderLayout.CENTER);
 
+        dialog.setVisible(true);
+    }
+
+    private void showEmployeeList(Component parent) {
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(parent), "All Employees", true);
+        dialog.setSize(700, 400);
+        dialog.setLocationRelativeTo(parent);
+
+        String[] columns = {"Employee Number", "Full Name", "Position", "Hourly Rate"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+
+        for (Employee e : employees) {
+            model.addRow(new Object[]{
+                    e.getEmployeeNumber(),
+                    e.getFullName(),
+                    e.getPosition(),
+                    e.getHourlyRate()
+            });
+        }
+
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        dialog.add(scrollPane);
         dialog.setVisible(true);
     }
