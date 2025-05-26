@@ -5,3 +5,5 @@
 [May 20, 2025] dev-aly messaged mentor for feedback on Class Diagram
 [May 24, 2025] dev-aly refactored old code to match the new class diagram and applied modular structure (mock data only for testing)
 [May 25, 2025] dev-aly uploaded Change Requests
+[May 25, 2025] dev-aly worked on the proposed landing page and dashboard. Note: we didn’t go with this design because it doesn’t match MPHCR01-Feature 1 and would be hard to integrate. But we plan to use it later for MotorPH’s GUI
+[May 26, 2025] dev-aly uploaded MotorPH GUI Landing Page/Dashboard
