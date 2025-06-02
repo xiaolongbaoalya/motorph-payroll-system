@@ -8,4 +8,4 @@
 
 **dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly
 
-**dev-shane:** Enhanced Main Window (Login Screen) by changing button color. Employee dashboard section headers by adding bold section headers for Basic Information and Compensations. General improvements Consistent Fonts: used Segoe UI font.
+**dev-shane:** Restructured the GUI code so that the payroll generation functionality now takes place within the same frame as the 'View Employee Details' frame, instead of opening a separate window.
