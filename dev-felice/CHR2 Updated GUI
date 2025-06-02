@@ -347,7 +347,7 @@ public class MainGUI extends JFrame {
         List<String> summaryLines = List.of(
     "Payroll Summary for " + ym,
     "",
-    "--- Employee Info ---",
+    "--- Employee Information ---",
     "Full Name: " + emp.getFullName(),
     "Employee No.: " + emp.getEmployeeNumber(),
     "Birthday: " + emp.getBirthday(),
