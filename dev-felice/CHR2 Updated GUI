@@ -338,7 +338,7 @@ public class MainGUI extends JFrame {
     JButton calcBtn = new JButton("Calculate Payroll");
     styleButtonSmall(calcBtn);
 
-    calcBtn.addActionListener(e -> { // PAYROLL
+    calcBtn.addActionListener(e -> { // PAYROLL SUMMARY PROMPT
     try {
         YearMonth ym = YearMonth.parse(monthField.getText().trim(), DateTimeFormatter.ofPattern("yyyy-MM"));
         double gross = payrollService.calculateMonthlySalary(emp, ym);
@@ -769,7 +769,7 @@ StyledPayrollPromptDialog(detailDialog, "Payroll Summary", summaryLines.toArray(
         errorDialog.setVisible(true);
     }
     
-    private void StyledPayrollPromptDialog(Component parent, String title, String[] lines) {
+    private void StyledPayrollPromptDialog(Component parent, String title, String[] lines) { // NEW HELPER FOR PAYROLL SUMMARY PROMPT
         JDialog payrollDialog = new JDialog((Window) SwingUtilities.getWindowAncestor(parent), title, Dialog.ModalityType.APPLICATION_MODAL);
         payrollDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         payrollDialog.setSize(500, 600);
