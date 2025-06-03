@@ -9,4 +9,4 @@
 [May 26, 2025] dev-aly uploaded MotorPH GUI Landing Page/Dashboard
 [June 2, 2025] dev-aly started working on the GUI implementation of Red's new code for MPHCR02
 [June 2, 2025] dev-aly finished the GUI for MPHCR02 without the add employee GUI and uploaded it to Github which was later picked up by dev-cm
-[June 2, 2025] dev cm added the 'add employee' function along with dev-aly's GUI
+[June 2, 2025] dev cm added the 'add employee' based on dev-aly's GUI and pieced it together for the full GUI integration
