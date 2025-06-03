@@ -22,7 +22,7 @@
 
 **dev-felice** further refined the updated GUI, ran QA testing to ensure compliance, and made several UI improvements for better usability and consistency.
 
-**dev-shanev** finalized the GUI layout and interaction flow, and also addressed and resolved the QA issues reported by dev-felice.
+**dev-shane** finalized the GUI layout and interaction flow, and also addressed and resolved the QA issues reported by dev-felice.
 
 **Submission incident*
 
