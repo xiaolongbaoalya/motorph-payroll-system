@@ -1,12 +1,24 @@
 **Enhancements Made to the Payroll System GUI**
 
-**dev-red:** Restructured CP1 code according to class. Restructured code for MS1 in accordance to mentor's feedback.
+**dev-red:** Restructured CP1 code according to class.
 
-**dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly. Finished code for View All Employee output.
+**dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly.
 
-**dev-christine:** Converted restructured CP1 code to GUI. Uploaded zipped folder GUI Prototype. Converted dev-red and dev-aly's code into GUI.
+**dev-christine:** Converted restructured CP1 code to GUI. Uploaded zipped folder GUI Prototype.
 
-**dev-felice:** Created + updated all helper dialogs (styleButton, styleButtonSmall, etc) and added some imports and set the GUI parameters. Also created/updated current GUI (showAdminMenu GUI, salaryCalculationMenu GUI, etc.) after initial GUI by dev-christine. Refined GUI based on CHR2 requests for window when Compute Payroll is triggered. QA Testing for both MS1 and HW # 4.
+**dev-felice:** Created + updated all helper dialogs (styleButton, styleButtonSmall, etc) and added some imports and set the GUI parameters. Also created/updated current GUI (showAdminMenu GUI, salaryCalculationMenu GUI, etc.) after initial GUI by dev-christine. 
+
+**dev-shane:** Restructured the GUI code so that the payroll generation functionality now takes place within the same frame as the 'View Employee Details' frame, instead of opening a separate window.
+
+**Refined MS1**
+
+**dev-red:** Restructured code for MS1 in accordance to mentor's feedback.
+
+**dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly. Finished code for View All Employee output, Employee Details, and Calculation prompt.
+
+**dev-christine:** Converted dev-red and incorporated dev-aly's code into GUI. Used dev-aly's initial code to build add employee GUI which reflects the data once added. Test run is also included
+
+**dev-felice:** Refined GUI based on CHR2 requests for window for compliance when Compute Payroll is triggered. Did full QA Testing for both MS1 and HW # 4.
 
 **dev-shane:** Restructured the GUI code so that the payroll generation functionality now takes place within the same frame as the 'View Employee Details' frame, instead of opening a separate window.
 
