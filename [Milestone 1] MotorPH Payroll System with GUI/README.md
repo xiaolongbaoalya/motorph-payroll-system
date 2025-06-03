@@ -23,8 +23,6 @@
 
 This update focuses on implementing **Change Request 2 (MPHCR02)** and enhancing the payroll system GUI.
 
----
-
 ### 👨‍💻 Developer Contributions
 
 - **dev-red**  
