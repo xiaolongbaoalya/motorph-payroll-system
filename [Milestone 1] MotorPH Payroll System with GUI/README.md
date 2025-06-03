@@ -1,35 +1,29 @@
-**Enhancements Made to the Payroll System GUI**
+**Milestone 1 Overview**
 
-**dev-red:** Restructured CP1 code according to class.
+**dev-aly**, **dev-felice**, and **dev-red** collaborated to restructure the class diagram, providing a clear blueprint for dev-red to follow in reorganizing the system code.
 
-**dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly.
+**dev-red:** took the lead in refactoring the CP1 codebase to align with Java standards, introducing modular class structures and incorporating mentor feedback.
 
-**dev-christine:** Converted restructured CP1 code to GUI. Uploaded zipped folder GUI Prototype.
+**dev-aly:** designed the initial landing page and dashboard interface. While the finalized landing page design was not integrated (due to its deviation from the MPHCR01 scope), it remains available under dev-aly folder.
 
-**dev-felice:** Created + updated all helper dialogs (styleButton, styleButtonSmall, etc) and added some imports and set the GUI parameters. Also created/updated current GUI (showAdminMenu GUI, salaryCalculationMenu GUI, etc.) after initial GUI by dev-christine. 
+**dev-christine:** translated the refactored CP1 code into a Java Swing GUI and developed a prototype.
 
-**dev-shane:** Restructured the GUI code so that the payroll generation functionality now takes place within the same frame as the 'View Employee Details' frame, instead of opening a separate window.
+**dev-felice:** improved the interface originally built by dev-christine, making it more polished and user-friendly, and also conducted quality assurance testing.
 
-**Refined MS1**
+**dev-shane:** finalized the Milestone 1 version by improving the GUI flow.
 
-**dev-red:** Restructured code for MS1 in accordance to mentor's feedback.
+**MPHCR02 Implementation (Milestone 1 Refinements)**
 
-**dev-aly:** Created the landing page and dashboard view. Official landing page still not added due to complexity, can be viewed under dev-aly. Finished code for View All Employee output, Employee Details, and Calculation prompt.
+**dev-red** updated the code to meet all MPHCR02 change request requirements.
 
-**dev-christine:** Converted dev-red and incorporated dev-aly's code into GUI. Used dev-aly's initial code to build add employee GUI which reflects the data once added. Test run is also included
+**dev-aly** began work on the MPHCR02 GUI layout, initially excluding the "Add Employee".
 
-**dev-felice:** Refined GUI based on CHR2 requests for window for compliance when Compute Payroll is triggered. Did full QA Testing for both MS1 and HW # 4.
+**dev-christine** implemented the “Add Employee” GUI functionality and integrated it into the current build.
 
-**dev-shane:** Restructured the GUI code so that the payroll generation functionality now takes place within the same frame as the 'View Employee Details' frame, instead of opening a separate window.
+**dev-felice** further refined the updated code, ran QA testing, and made UI improvements to ensure usability and consistency.
 
-**Incident Report**
+**dev-shanev** finalized the GUI layout and interaction flow, ensuring full compliance with the MPHCR02 change request.
 
-Milestone 1 and its original GUI were deleted. A new Milestone 1 folder was uploaded containing Red’s updated code, but it currently includes only the GUI for Change Request 2 (the Chr2gui1.java), not the full GUI for the entire payroll system.
+**Submission incident*
 
-The MainGUI in the dev folder is based on Red’s updated code. While it is a complete GUI tailored for Change Request 2, it is not the original GUI we created for Milestone 1. That said, since it serves as the current MainGUI, it should still be placed in the Milestone 1 folder along with the rest of the build.
-
-Chr2gui1 is currently located in the Milestone 1 folder, but it actually belongs in Homework 4, along with a fully integrated version that works with the complete payroll system GUI (which we currently don’t have).
-
-Additionally, the MainGUI in dev is not the version we originally planned to submit. The correct version should display the monthly salary result directly below the month/year input fields, rather than opening it in a new window.
-
-Note: Chr2gui1 is a standalone build specifically for Change Request 2 and does not contain the full payroll system.
+The original Milestone 1 folder and GUI were removed during submission by a group member. A new folder containing Red’s updated code was uploaded, but it only included Chr2gui1.java for Change Request 2, not the version integrated with the full payroll system. Chr2gui1 was also placed in the wrong folder. After consulting our mentor, we were advised to simply reorganize the files. We've since corrected the structure, and everything is now in order.
