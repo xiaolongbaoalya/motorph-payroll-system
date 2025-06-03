@@ -1,7 +1,18 @@
-**Homework # 4**: MPHCR02 Implementation
+📌 Homework #4: MPHCR02 Implementation
+This update focuses on implementing Change Request 2 (MPHCR02) and enhancing the payroll system GUI.
 
-**dev-red** updated the code to meet all MPHCR02 change request requirements.
-**dev-aly** began work on the MPHCR02 GUI layout, initially excluding the "Add Employee".
-**dev-christine** implemented the “Add Employee” GUI functionality and integrated it into the current build.
-**dev-felice** further refined the updated code, ran QA testing, and made UI improvements to ensure usability, consistency, and compliance.
-**dev-shane** finalized the GUI layout and interaction flow, ensuring full compliance with the MPHCR02 change request.
+👨‍💻 Developer Contributions
+dev-red
+Updated the core codebase to fulfill all MPHCR02 requirements.
+
+dev-aly
+Initiated the GUI layout for MPHCR02, with the initial version excluding the “Add Employee” feature.
+
+dev-christine
+Implemented the “Add Employee” GUI functionality and successfully integrated it into the current build.
+
+dev-felice
+Refined the updated GUI, conducted QA testing to ensure compliance, and improved the interface for better usability and consistency.
+
+dev-shane
+Finalized the overall GUI layout and interaction flow, resolved the QA issues raised by felice, and developed additional GUIs to meet MPHCR02 requirements.
