@@ -20,10 +20,10 @@
 
 **dev-christine** implemented the “Add Employee” GUI functionality and integrated it into the current build.
 
-**dev-felice** further refined the updated code, ran QA testing, and made UI improvements to ensure usability and consistency.
+**dev-felice** further refined the updated GUI, ran QA testing to ensure compliance, and made several UI improvements for better usability and consistency.
 
-**dev-shanev** finalized the GUI layout and interaction flow, ensuring full compliance with the MPHCR02 change request.
+**dev-shanev** finalized the GUI layout and interaction flow, and also addressed and resolved the QA issues reported by dev-felice.
 
 **Submission incident*
 
-The original Milestone 1 folder and GUI were removed during submission by a group member. A new folder containing Red’s updated code was uploaded, but it only included Chr2gui1.java for Change Request 2, not the version integrated with the full payroll system. Chr2gui1 was also placed in the wrong folder. After consulting our mentor, we were advised to simply reorganize the files. We've since corrected the structure, and everything is now in order.
+The original Milestone 1 folder and GUI were removed during submission by a group member. A new folder containing **dev-red**'s updated code was uploaded, but it only included the standalone GUI for Change Request 2, not the version integrated with the full payroll system. After consulting our mentor, we were advised to simply reorganize the files. We've since corrected the structure, and everything is now in order.
