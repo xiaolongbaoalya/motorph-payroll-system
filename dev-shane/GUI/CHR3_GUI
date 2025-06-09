@@ -589,8 +589,8 @@ StyledPayrollPromptDialog(detailDialog, "Payroll Summary", summaryLines.toArray(
                         "Confirm Delete", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     try {
-                        System.out.println("[DEBUG] Calling CSVWriter.deleteEmployeeFromCSV(" + empNum + ")");
-                        CSVWriter.deleteEmployeeFromCSV(empNum);
+                        System.out.println("[DEBUG] Calling CSVWriter.writeEmployees(" + empNum + ")");
+                        CSVWriter.writeEmployees(empNum);
                         System.out.println("[DEBUG] Successfully deleted from CSV");
                         employees.remove(emp);
                         tableModel.removeRow(row);
