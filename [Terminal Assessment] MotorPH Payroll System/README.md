@@ -25,3 +25,6 @@ The team then addressed the minor improvements suggested during the feedback ses
 - **dev-shane**: Improved unclear error pop-ups to provide more informative user feedback during form validation and invalid operations.
 
 - **dev-christine**: Performed final code cleanup by removing unused methods and imports, and successfully integrated **dev-shane**’s GUI module into the main application.
+
+- **dev-red**: Gave the project a final review and go signal for submission.
+
